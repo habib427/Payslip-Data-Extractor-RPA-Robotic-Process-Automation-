@@ -3,7 +3,6 @@ import re
 def clean_payslip_data(raw_text: str) -> dict:
     data = {}
 
-    # Employee Info
     data["employee_code"] = re.search(r"Employee Code\s*:\s*(\S+)", raw_text)
     data["employee_code"] = data["employee_code"].group(1) if data["employee_code"] else ""
 
@@ -60,12 +59,7 @@ def clean_payslip_data(raw_text: str) -> dict:
     return data
 
 
-
 def autofill_missing_values(data_list):
-    """
-    Fill empty fields in each payslip row using last seen values
-    from previous rows.
-    """
     last_seen = {}
     for row in data_list:
         for key, value in row.items():
